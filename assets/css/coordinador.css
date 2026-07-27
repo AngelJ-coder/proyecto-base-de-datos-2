@@ -1,0 +1,337 @@
+/* ===================== ALERTAS ===================== */
+.alerta{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 18px;
+    border-radius:var(--radius-md);
+    font-size:.88rem;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+.alerta-ok{
+    background:var(--green-soft);
+    color:#087443;
+    border:1px solid #a6e9c6;
+}
+
+.alerta-error{
+    background:var(--red-soft);
+    color:#b91c1c;
+    border:1px solid #f7c1bc;
+}
+
+/* ===================== TARJETAS ESTADÍSTICAS (Dashboard) ===================== */
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));
+    gap:16px;
+    margin-bottom:26px;
+}
+
+.stat-card-link{ text-decoration:none; display:block; }
+
+.stat-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-sm);
+    padding:18px 20px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    transition:.2s ease;
+    height:100%;
+}
+
+.stat-card:hover{ box-shadow:var(--shadow-md); }
+
+.stat-card.alerta{
+    border:2px solid var(--red);
+    box-shadow:0 0 0 4px var(--red-soft);
+}
+
+.stat-icono{
+    width:44px;
+    height:44px;
+    border-radius:var(--radius-md);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.05rem;
+    flex-shrink:0;
+}
+
+.stat-icono.verde{ background:var(--green-soft); color:var(--green); }
+.stat-icono.rojo{ background:var(--red-soft); color:var(--red); }
+.stat-icono.naranja{ background:var(--orange-soft); color:var(--orange); }
+.stat-icono.azul{ background:var(--accent-soft); color:var(--accent); }
+.stat-icono.morado{ background:#f1effe; color:#7c6df2; }
+
+.stat-numero{
+    font-size:1.45rem;
+    font-weight:700;
+    color:var(--text);
+    line-height:1.1;
+}
+
+.stat-label{
+    font-size:.76rem;
+    color:var(--muted);
+    margin-top:2px;
+}
+
+/* ===================== BLOQUES ANCHOS ===================== */
+.bloque-ancho{
+    grid-column:1 / -1;
+    margin-bottom:20px;
+}
+
+.bloque h3 i{
+    color:var(--accent);
+    font-size:.85rem;
+}
+
+/* ===================== LISTA MINI (Sesiones por estado) ===================== */
+.lista-mini{ display:flex; flex-direction:column; gap:2px; }
+
+.fila-mini{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:9px 4px;
+    font-size:.85rem;
+    color:#334155;
+    border-bottom:1px solid #f1f3f9;
+}
+
+.fila-mini:last-child{ border-bottom:none; }
+
+/* ===================== LINK "VER MÁS" ===================== */
+.link-ver-mas{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top:12px;
+    color:var(--accent);
+    text-decoration:none;
+    font-size:.83rem;
+    font-weight:700;
+}
+
+.link-ver-mas:hover{ text-decoration:underline; }
+
+/* ===================== BADGES DE ESTADO (multi-estado) ===================== */
+.badge-estado{
+    padding:4px 12px;
+    border-radius:999px;
+    font-size:.72rem;
+    font-weight:700;
+    text-transform:capitalize;
+    display:inline-block;
+    white-space:nowrap;
+}
+
+.badge-estado.pendiente{ background:var(--orange-soft); color:#92400e; border:1px solid #fbd68a; }
+.badge-estado.asignada{ background:var(--green-soft); color:#087443; border:1px solid #a6e9c6; }
+.badge-estado.rechazada{ background:var(--red-soft); color:#b91c1c; border:1px solid #f7c1bc; }
+.badge-estado.programada{ background:var(--accent-soft); color:var(--accent); border:1px solid #c7d0fb; }
+.badge-estado.en_curso{ background:var(--orange-soft); color:#92400e; border:1px solid #fbd68a; }
+.badge-estado.completa{ background:#f1effe; color:#5b4bd6; border:1px solid #d6d0fb; }
+.badge-estado.finalizada{ background:var(--green-soft); color:#087443; border:1px solid #a6e9c6; }
+.badge-estado.cancelada{ background:var(--red-soft); color:#b91c1c; border:1px solid #f7c1bc; }
+
+/* ===================== TABS ===================== */
+.tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:16px;
+    flex-wrap:wrap;
+}
+
+.tabs a{
+    padding:8px 16px;
+    border-radius:999px;
+    background:var(--surface);
+    color:var(--muted);
+    text-decoration:none;
+    font-size:.8rem;
+    font-weight:700;
+    border:1px solid var(--border);
+    transition:.15s ease;
+}
+
+.tabs a:hover{ background:var(--accent-soft); color:var(--accent); }
+
+.tabs a.activo{
+    background:linear-gradient(135deg,var(--accent),#6d5ff5);
+    color:#fff;
+    border-color:transparent;
+    box-shadow:0 4px 14px rgba(79,109,245,.3);
+}
+
+/* ===================== FILTROS / FORMULARIOS ===================== */
+.filtros{
+    display:flex;
+    gap:14px;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+}
+
+.filtros label{
+    font-size:.78rem;
+    font-weight:600;
+    color:var(--muted);
+    display:block;
+    margin-bottom:6px;
+}
+
+.campo{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.campo label{
+    font-size:.78rem;
+    font-weight:600;
+    color:var(--muted);
+}
+
+.campo.full{ grid-column:1 / -1; }
+
+select, input[type="text"], input[type="date"], input[type="time"],
+input[type="number"], input[type="email"], textarea{
+    padding:10px 12px;
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    font-size:.85rem;
+    color:var(--text);
+    background:var(--bg);
+    transition:.15s ease;
+    font-family:inherit;
+}
+
+select:focus, input:focus, textarea:focus{
+    outline:none;
+    border-color:var(--accent);
+    background:#fff;
+    box-shadow:0 0 0 3px var(--accent-soft);
+}
+
+textarea{ resize:vertical; }
+
+.texto-muted{ color:var(--muted); font-size:.78rem; }
+
+/* ===================== BOTONES ===================== */
+.btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 20px;
+    border-radius:var(--radius-md);
+    border:none;
+    cursor:pointer;
+    font-size:.85rem;
+    font-weight:700;
+    color:#fff;
+    text-decoration:none;
+    transition:.18s ease;
+}
+
+.btn-primario{
+    background:linear-gradient(135deg,var(--accent),#6d5ff5);
+    box-shadow:0 4px 14px rgba(79,109,245,.3);
+}
+.btn-primario:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(79,109,245,.4); }
+
+.btn-cancelar{
+    background:#94a3b8;
+}
+.btn-cancelar:hover{ background:#7c8ba1; }
+
+.acciones-form{
+    display:flex;
+    gap:12px;
+    margin-top:10px;
+}
+
+/* ===================== BOTONES PEQUEÑOS DE TABLA ===================== */
+.btn-mini{
+    display:inline-block;
+    padding:6px 14px;
+    border-radius:999px;
+    font-size:.74rem;
+    font-weight:700;
+    text-decoration:none;
+    color:#fff;
+    transition:.15s ease;
+}
+
+.btn-asignar{ background:linear-gradient(135deg,var(--accent),#6d5ff5); }
+.btn-asignar:hover{ opacity:.9; }
+
+.btn-rechazar{ background:var(--red); margin-left:6px; }
+.btn-rechazar:hover{ opacity:.9; }
+
+.acciones{ white-space:nowrap; }
+
+/* ===================== INFO SOLICITUD (asignar_sesion) ===================== */
+.info-solicitud{
+    background:var(--accent-soft);
+    border-left:4px solid var(--accent);
+    padding:18px 22px;
+    border-radius:var(--radius-md);
+    margin-bottom:20px;
+}
+
+.info-solicitud h4{
+    color:var(--accent);
+    font-size:1rem;
+    margin-bottom:10px;
+}
+
+.info-solicitud .fila{
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+    font-size:.85rem;
+    margin-top:6px;
+    color:var(--text);
+}
+
+.info-solicitud .fila strong{
+    color:var(--muted);
+    font-weight:600;
+}
+
+/* ===================== FORM GRID (asignar_sesion) ===================== */
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+@media (max-width:750px){
+    .form-grid{ grid-template-columns:1fr; }
+}
+
+.seccion-titulo{
+    grid-column:1 / -1;
+    color:var(--accent);
+    font-size:.92rem;
+    font-weight:700;
+    margin-top:6px;
+    border-top:1px solid var(--border);
+    padding-top:16px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.form-grid .seccion-titulo:first-child{ border-top:none; padding-top:0; margin-top:0; }
+
+.modalidad-bloque{ display:none; }
+.modalidad-bloque.activo{ display:contents; }

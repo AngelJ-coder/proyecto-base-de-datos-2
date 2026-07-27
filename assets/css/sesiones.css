@@ -1,0 +1,98 @@
+/* ===================== ALERTA WARNING (sesiones vencidas) ===================== */
+.alerta-warning{
+    background:var(--orange-soft);
+    color:#92400e;
+    border:1px solid #fbd68a;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.btn-warning{
+    background:var(--orange);
+    color:#fff;
+}
+.btn-warning:hover{ opacity:.9; }
+
+/* ===================== TABLA CON SCROLL HORIZONTAL ===================== */
+.tabla-scroll{ overflow-x:auto; }
+.tabla-scroll table{ min-width:1050px; }
+
+/* ===================== CUPO ===================== */
+.cupo{
+    font-weight:700;
+    font-size:.82rem;
+    color:var(--text);
+}
+.cupo.lleno{ color:var(--red); }
+
+/* ===================== BOTONES DE ACCIÓN EN TABLA ===================== */
+.acciones-col{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    white-space:nowrap;
+}
+
+.btn-ver{
+    background:linear-gradient(135deg,var(--accent),#6d5ff5);
+    border:none;
+    cursor:pointer;
+    font-family:inherit;
+}
+.btn-ver:hover{ opacity:.9; }
+
+.btn-finalizar{ background:var(--green); }
+.btn-finalizar:hover{ opacity:.9; }
+
+/* ===================== MODAL ===================== */
+.modal-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.55);
+    align-items:center;
+    justify-content:center;
+    z-index:100;
+}
+
+.modal-overlay.abierto{ display:flex; }
+
+.modal-box{
+    background:var(--surface);
+    border-radius:var(--radius-lg);
+    padding:26px;
+    max-width:480px;
+    width:90%;
+    max-height:80vh;
+    overflow-y:auto;
+    box-shadow:var(--shadow-md);
+    position:relative;
+}
+
+.modal-box h3{
+    color:var(--text);
+    font-size:1rem;
+    font-weight:700;
+    margin-bottom:16px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.modal-box h3 i{ color:var(--accent); }
+
+.modal-box table{ width:100%; border-collapse:collapse; }
+.modal-box th{ color:var(--muted); font-size:.72rem; text-transform:uppercase; padding:8px 6px; text-align:left; }
+.modal-box td{ padding:8px 6px; font-size:.85rem; border-bottom:1px solid #f1f3f9; color:#334155; }
+
+.modal-close{
+    position:absolute;
+    top:18px;
+    right:20px;
+    cursor:pointer;
+    color:var(--muted);
+    font-size:1rem;
+    transition:.15s ease;
+}
+.modal-close:hover{ color:var(--red); }

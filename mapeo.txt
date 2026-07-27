@@ -1,0 +1,194 @@
+﻿Mapeo de Objetos del Script por Rol
+
+Resumen por rol
+- Administrador: usa usuarios, áreas, reportes y mantenimiento.
+- Coordinador: usa solicitudes, sesiones, tutores y reportes.
+- Tutor: usa disponibilidad, evaluaciones, materiales y áreas.
+- Estudiante: usa sesiones, evaluaciones, solicitudes y materiales.
+
+ADMINISTRADOR
+Archivo | Objetos del script usados
+- dashboard.php | vw_usuarios_por_rol, vw_usuarios_activos, vw_tutores_mas_solicitados
+- usuarios.php | sp_crear_usuario, sp_cambiar_estado_usuario, vw_usuarios_por_rol
+- carreras.php | fn_total_areas_carrera (SQL directo)
+- areas.php | sp_crear_area, sp_areas_por_carrera
+- tutores_areas.php | fn_usuario_activo (SQL directo)
+- reportes.php | sp_listar_usuarios_inactivos_largo, sp_contar_usuarios_por_dominio, sp_resumen_areas_por_carrera, sp_verificar_tutores_sin_area, sp_resumen_sesiones_por_modalidad, sp_resumen_sesiones_por_area_cursor, vw_sesiones_por_estado_y_area
+- mantenimiento.php | sp_ocultar_materiales_antiguos (SQL directo)
+
+COORDINADOR
+Archivo | Objetos del script usados
+- dashboard.php | vw_tutores_mas_solicitados
+- solicitudes.php | Ninguno — SQL directo
+- asignar_sesion.php | sp_crear_sesion, sp_tutores_disponibles
+- sesiones.php | sp_cerrar_sesiones_vencidas
+- tutores.php | vw_disponibilidad_general, sp_tutores_carga_horaria
+- reportes.php | vw_demanda_por_area, vw_tutores_mas_solicitados, vw_reporte_tutorias, sp_promedio_por_area, vw_tutores_con_sesiones_activas, sp_reporte_tutores_sin_sesiones_activas_cursor
+- exportar_reporte.php | vw_reporte_tutorias
+- historial_estudiante.php | Ninguno — SQL directo
+- notificaciones.php | sp_marcar_solicitudes_urgentes, sp_areas_sin_tutor
+
+TUTOR
+Archivo | Objetos del script usados
+- dashboard.php | Ninguno — SQL directo
+- mis_sesiones.php | fn_cupos_disponibles, fn_total_estudiantes_sesion, fn_promedio_estudiante
+- disponibilidad.php | sp_registrar_disponibilidad, fn_total_disponibilidades
+- mis_areas.php | fn_tutor_dicta_area, vw_tutores_completo
+- registrar_evaluacion.php | sp_registrar_evaluacion, fn_promedio_estudiante
+- marcar_asistencia.php | Ninguno — SQL directo
+- material_apoyo.php | fn_total_materiales_area, fn_total_materiales_visibles_area, sp_subir_material
+- perfil.php | Ninguno — SQL directo
+
+ESTUDIANTE
+Archivo | Objetos del script usados
+- dashboard.php | fn_nombre_completo, fn_promedio_estudiante, fn_sesiones_pendientes_estudiante
+- solicitar_tutoria.php | vw_areas_por_carrera, fn_nombre_carrera
+- mis_solicitudes.php | Ninguno — SQL directo
+- sesiones_disponibles.php | vw_sesiones_activas, fn_cupos_disponibles, sp_inscribir_estudiante
+- mis_sesiones.php | Ninguno — SQL directo
+- mi_historial.php | fn_promedio_estudiante, vw_evaluaciones_completo
+- material_apoyo.php | fn_total_materiales_area
+- perfil.php | fn_nombre_completo
+
+TRIGGERS — Dónde se activa cada uno
+- trg_incrementar_cupo → AFTER INSERT ON sesion_estudiante | Estudiante en sesiones_disponibles.php; también coordinador en asignar_sesion.php.
+- trg_decrementar_cupo → AFTER DELETE ON sesion_estudiante | Estudiante en mis_sesiones.php.
+- trg_validar_email → BEFORE INSERT ON usuario | Admin en usuarios.php.
+- trg_estado_default → BEFORE INSERT ON usuario | Admin en usuarios.php.
+- trg_area_nombre_mayus → BEFORE INSERT ON area_academica | Admin en areas.php.
+- trg_evitar_area_duplicada → BEFORE INSERT ON area_academica | Admin en areas.php.
+- trg_evitar_disponibilidad_duplicada → BEFORE INSERT ON disponibilidad_tutor | Tutor en disponibilidad.php.
+- trg_actualizar_disponible_tutor → AFTER INSERT ON disponibilidad_tutor | Tutor en disponibilidad.php.
+- trg_validar_cupo → BEFORE INSERT ON sesion_estudiante | Estudiante en sesiones_disponibles.php.
+- trg_validar_modalidad_detalle → BEFORE INSERT ON detalle_modalidad_sesion | Coordinador en asignar_sesion.php.
+- trg_validar_evaluacion → BEFORE INSERT ON evaluacion_sesion | Tutor en registrar_evaluacion.php.
+- trg_validar_tipo_archivo → BEFORE INSERT ON material_apoyo | Tutor en material_apoyo.php.
+- trg_estado_default_plan → BEFORE INSERT ON plan_tutoria | Coordinador/estudiante en flujos relacionados con planes y solicitudes.
+- trg_estado_default_material → BEFORE INSERT ON material_apoyo | Tutor en material_apoyo.php.
+
+MAPEO DETALLADO POR OBJETO DEL SCRIPT
+INTEGRANTE 1
+- sp_cambiar_estado_usuario → admin/usuarios.php
+- sp_crear_usuario → admin/usuarios.php
+- fn_nombre_completo → estudiante/dashboard.php, estudiante/perfil.php
+- fn_usuario_activo → admin/tutores_areas.php
+- vw_usuarios_por_rol → admin/dashboard.php, admin/usuarios.php
+- vw_usuarios_activos → admin/dashboard.php
+- sp_listar_usuarios_inactivos_largo → admin/reportes.php
+- sp_contar_usuarios_por_dominio → admin/reportes.php
+- trg_validar_email → admin/usuarios.php
+- trg_estado_default → admin/usuarios.php
+
+INTEGRANTE 2
+- sp_crear_area → admin/areas.php
+- sp_areas_por_carrera → admin/areas.php
+- fn_total_areas_carrera → admin/carreras.php
+- fn_nombre_carrera → estudiante/solicitar_tutoria.php
+- vw_areas_por_carrera → estudiante/solicitar_tutoria.php
+- vw_demanda_por_area → coordinador/reportes.php
+- sp_resumen_areas_por_carrera → admin/reportes.php
+- sp_areas_sin_tutor → coordinador/notificaciones.php
+- trg_area_nombre_mayus → admin/areas.php
+- trg_evitar_area_duplicada → admin/areas.php
+
+INTEGRANTE 3
+- sp_tutores_disponibles → coordinador/asignar_sesion.php
+- sp_registrar_disponibilidad → tutor/disponibilidad.php
+- fn_tutor_dicta_area → tutor/mis_areas.php
+- fn_total_disponibilidades → tutor/disponibilidad.php
+- vw_tutores_completo → tutor/mis_areas.php
+- vw_disponibilidad_general → coordinador/tutores.php
+- sp_tutores_carga_horaria → coordinador/tutores.php
+- sp_verificar_tutores_sin_area → admin/reportes.php
+- trg_evitar_disponibilidad_duplicada → tutor/disponibilidad.php
+- trg_actualizar_disponible_tutor → tutor/disponibilidad.php
+
+INTEGRANTE 4
+- sp_inscribir_estudiante → estudiante/sesiones_disponibles.php
+- sp_crear_sesion → coordinador/asignar_sesion.php
+- fn_cupos_disponibles → estudiante/sesiones_disponibles.php
+- fn_total_estudiantes_sesion → tutor/mis_sesiones.php
+- vw_reporte_tutorias → coordinador/reportes.php, coordinador/exportar_reporte.php
+- vw_sesiones_activas → estudiante/sesiones_disponibles.php
+- sp_marcar_solicitudes_urgentes → coordinador/notificaciones.php
+- sp_cerrar_sesiones_vencidas → coordinador/sesiones.php
+- trg_validar_cupo → estudiante/sesiones_disponibles.php
+- trg_validar_modalidad_detalle → coordinador/asignar_sesion.php
+
+INTEGRANTE 5
+- sp_registrar_evaluacion → tutor/registrar_evaluacion.php
+- sp_subir_material → tutor/material_apoyo.php
+- fn_promedio_estudiante → estudiante/dashboard.php, estudiante/mi_historial.php, tutor/mis_sesiones.php, tutor/registrar_evaluacion.php
+- fn_total_materiales_area → estudiante/material_apoyo.php, tutor/material_apoyo.php
+- vw_tutores_mas_solicitados → admin/dashboard.php, coordinador/dashboard.php
+- vw_evaluaciones_completo → estudiante/mi_historial.php
+- sp_promedio_por_area → coordinador/reportes.php
+- sp_ocultar_materiales_antiguos → admin/mantenimiento.php
+- trg_validar_evaluacion → tutor/registrar_evaluacion.php
+- trg_validar_tipo_archivo → tutor/material_apoyo.php
+
+INTEGRANTE 6
+- sp_resumen_sesiones_por_modalidad → admin/reportes.php
+- sp_reporte_tutores_sin_sesiones_activas → coordinador/reportes.php------------
+- fn_sesiones_pendientes_estudiante → estudiante/dashboard.php
+- fn_total_materiales_visibles_area → tutor/material_apoyo.php
+- sp_resumen_sesiones_por_area_cursor → admin/reportes.php
+- sp_reporte_tutores_sin_sesiones_activas_cursor → coordinador/reportes.php
+- vw_sesiones_por_estado_y_area → admin/reportes.php
+- vw_tutores_con_sesiones_activas → coordinador/reportes.php
+- trg_estado_default_plan → coordinador/asignar_sesion.php
+- trg_estado_default_material → tutor/material_apoyo.php
+
+
+-----------------------------------
+CONSULTAS 
+-----------------------------------
+
+INTEGRANTE 1
+I1-1 Listado completo de solicitudes de tutoría → coordinador/solicitudes.php
+I1-2 Cantidad de solicitudes por estado → coordinador/solicitudes.php, admin/dashboard.php, coordinador/dashboard.php
+I1-3 Usuarios con teléfono registrado → admin/usuarios.php
+I1-4 Usuarios inactivos → admin/usuarios.php
+I1-5 Usuarios registrados en el último mes → admin/usuarios.php, admin/reportes.php
+I1-6 Buscar usuario por correo → admin/usuarios.php
+I1-7 Coordinadores y su cargo → admin/usuarios.php
+INTEGRANTE 2
+I2-1 Áreas académicas disponibles para el filtro → coordinador/solicitudes.php, coordinador/asignar_sesion.php
+I2-2 Materiales de apoyo por tutor → estudiante/material_apoyo.php
+I2-3 Materiales visibles por área → estudiante/material_apoyo.php
+I2-4 Estudiantes agrupados por carrera → admin/carreras.php
+I2-5 Solicitudes del estudiante → estudiante/mis_solicitudes.php, coordinador/historial_estudiante.php
+I2-6 Buscar área por nombre → admin/areas.php
+I2-7 Carreras con su facultad → admin/carreras.php
+INTEGRANTE 3
+I3-1 Tutores con su especialidad y modalidad preferida → tutor/mis_areas.php, coordinador/tutores.php
+I3-2 Sesiones disponibles para inscripción → estudiante/sesiones_disponibles.php
+I3-3 Áreas sin descripción registrada → admin/areas.php, coordinador/solicitudes.php
+I3-4 Historial de evaluaciones del estudiante → estudiante/mi_historial.php
+I3-5 Cantidad de áreas que dicta cada tutor → tutor/mis_areas.php
+I3-6 Solicitudes realizadas por el estudiante → estudiante/mis_solicitudes.php, coordinador/historial_estudiante.php
+I3-7 Disponibilidad agrupada por día → tutor/disponibilidad.php
+INTEGRANTE 4
+I4-1 Rechazar una solicitud pendiente → coordinador/solicitudes.php
+I4-2 Sesiones programadas del tutor → tutor/mis_sesiones.php
+I4-3 Estudiantes inscritos en una sesión → tutor/mis_sesiones.php, coordinador/sesiones.php
+I4-4 Áreas académicas de la carrera del estudiante → estudiante/sesiones_disponibles.php
+I4-5 Datos del perfil del estudiante → coordinador/historial_estudiante.php, estudiante/perfil.php
+I4-6 Sesiones virtuales con detalle de modalidad → tutor/mis_sesiones.php, coordinador/sesiones.php
+I4-7 Historial de sesiones de un estudiante → estudiante/mis_sesiones.php
+INTEGRANTE 5
+I5-1 Sesiones finalizadas aún sin evaluación registrada → tutor/registrar_evaluacion.php
+I5-2 Reporte de tutorías por rango de fechas → coordinador/reportes.php, coordinador/exportar_reporte.php
+I5-3 Promedio general del estudiante → estudiante/mi_historial.php, coordinador/historial_estudiante.php
+I5-4 Materiales subidos con días desde la subida → admin/mantenimiento.php
+I5-5 Sesiones inscritas del estudiante → estudiante/mis_sesiones.php
+I5-6 Materiales con tipo de archivo y tamaño → tutor/material_apoyo.php
+I5-7 Observaciones y recomendaciones del estudiante → estudiante/mi_historial.php
+INTEGRANTE 6
+I6-1 Conteo de sesiones por estado → admin/dashboard.php, coordinador/dashboard.php, coordinador/sesiones.php
+I6-2 Total de carreras registradas → admin/dashboard.php, admin/carreras.php
+I6-3 Total de áreas académicas registradas → admin/dashboard.php, admin/areas.php
+I6-4 Total de asignaciones tutor-área registradas → admin/dashboard.php, admin/tutores_areas.php
+I6-5 Áreas que dicta un tutor específico → tutor/mis_areas.php, admin/tutores_areas.php
+I6-6 Disponibilidad registrada de un tutor → tutor/disponibilidad.php, coordinador/tutores.php
+I6-7 Carrera del estudiante para filtrar áreas → estudiante/solicitar_tutoria.php, estudiante/sesiones_disponibles.php

@@ -1,0 +1,137 @@
+/* ===================== ALERTAS ===================== */
+.alerta{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 18px;
+    border-radius:var(--radius-md);
+    font-size:.88rem;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+.alerta-ok{
+    background:var(--green-soft);
+    color:#087443;
+    border:1px solid #a6e9c6;
+}
+
+.alerta-error{
+    background:var(--red-soft);
+    color:#b91c1c;
+    border:1px solid #f7c1bc;
+}
+
+/* ===================== TARJETAS DE ESTADÍSTICAS ===================== */
+.grid-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:18px;
+    margin-bottom:22px;
+}
+
+.card-stat{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-sm);
+    padding:20px 22px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    transition:.2s ease;
+}
+
+.card-stat:hover{ box-shadow:var(--shadow-md); }
+
+.card-icono{
+    width:46px;
+    height:46px;
+    border-radius:var(--radius-md);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.1rem;
+    flex-shrink:0;
+}
+
+.card-icono.verde{ background:var(--green-soft); color:var(--green); }
+.card-icono.gris{ background:#eef1f6; color:#64748b; }
+.card-icono.naranja{ background:var(--orange-soft); color:var(--orange); }
+
+.card-numero{
+    font-size:1.5rem;
+    font-weight:700;
+    color:var(--text);
+    line-height:1.1;
+}
+
+.card-label{
+    font-size:.78rem;
+    color:var(--muted);
+    margin-top:2px;
+}
+
+/* ===================== BLOQUES ANCHOS ===================== */
+.bloque-ancho{
+    grid-column:1 / -1;
+}
+
+.bloque h3 i{
+    color:var(--accent);
+    font-size:.85rem;
+}
+
+.descripcion{
+    color:var(--muted);
+    font-size:.85rem;
+    line-height:1.5;
+    margin-bottom:16px;
+}
+
+/* ===================== BADGES ===================== */
+.badge-tipo{
+    background:var(--accent-soft);
+    color:var(--accent);
+    padding:3px 11px;
+    border-radius:999px;
+    font-size:.72rem;
+    font-weight:700;
+    display:inline-block;
+}
+
+.badge-oculto{
+    background:#eef1f6;
+    color:#64748b;
+    padding:3px 11px;
+    border-radius:999px;
+    font-size:.72rem;
+    font-weight:700;
+    display:inline-block;
+}
+
+/* ===================== FORMULARIO / BOTÓN DE ACCIÓN ===================== */
+.form-mantenimiento{
+    margin-top:16px;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:11px 22px;
+    border-radius:var(--radius-md);
+    border:none;
+    cursor:pointer;
+    font-size:.86rem;
+    font-weight:700;
+    color:#fff;
+    transition:.18s ease;
+}
+
+.btn-naranja{
+    background:linear-gradient(135deg,var(--orange),#e07c00);
+    box-shadow:0 4px 14px rgba(247,144,9,.3);
+}
+
+.btn-naranja:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(247,144,9,.4); }

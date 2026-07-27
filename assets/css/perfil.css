@@ -1,0 +1,193 @@
+/* ===================== PERFIL: CABECERA ===================== */
+.perfil-header{
+    background:linear-gradient(135deg,var(--accent),#6d5ff5);
+    border-radius:var(--radius-lg);
+    padding:26px 30px;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    margin-bottom:22px;
+    box-shadow:var(--shadow-md);
+}
+
+.perfil-avatar{
+    width:66px;
+    height:66px;
+    border-radius:50%;
+    background:rgba(255,255,255,.18);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    font-weight:700;
+    flex-shrink:0;
+    border:2px solid rgba(255,255,255,.35);
+}
+
+.perfil-info{ flex:1; }
+
+.perfil-info h2{
+    color:#fff;
+    font-size:1.25rem;
+    font-weight:700;
+    letter-spacing:-.2px;
+}
+
+.perfil-rol{
+    color:rgba(255,255,255,.85);
+    font-size:.85rem;
+    margin-top:4px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+/* ===================== BADGE DE ESTADO ===================== */
+.badge-estado{
+    padding:4px 13px;
+    border-radius:999px;
+    font-size:.74rem;
+    font-weight:700;
+    text-transform:capitalize;
+    display:inline-block;
+}
+
+.badge-estado.activo{
+    background:var(--green-soft);
+    color:#087443;
+    border:1px solid #a6e9c6;
+}
+
+.badge-estado.inactivo{
+    background:var(--red-soft);
+    color:#b91c1c;
+    border:1px solid #f7c1bc;
+}
+
+/* En el header, sobre fondo de color, versión translúcida */
+.perfil-header .badge-estado{
+    background:rgba(255,255,255,.2);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.4);
+}
+
+/* ===================== ALERTAS ===================== */
+.alerta{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 18px;
+    border-radius:var(--radius-md);
+    font-size:.88rem;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+.alerta-ok{
+    background:var(--green-soft);
+    color:#087443;
+    border:1px solid #a6e9c6;
+}
+
+.alerta-error{
+    background:var(--red-soft);
+    color:#b91c1c;
+    border:1px solid #f7c1bc;
+}
+
+/* ===================== BLOQUES ANCHOS (ocupan las 2 columnas) ===================== */
+.bloque-ancho{
+    grid-column:1 / -1;
+}
+
+.bloque h3 i{
+    color:var(--accent);
+    font-size:.85rem;
+}
+
+/* ===================== TABLA DE SOLO LECTURA ===================== */
+.datos-lectura{ width:100%; border-collapse:collapse; }
+
+.datos-lectura td{
+    padding:10px 6px;
+    font-size:.87rem;
+    border-bottom:1px solid #f1f3f9;
+    color:#334155;
+}
+
+.datos-lectura tr:last-child td{ border-bottom:none; }
+
+.datos-lectura td:first-child{
+    color:var(--muted);
+    font-weight:600;
+    width:180px;
+}
+
+/* ===================== FORMULARIOS ===================== */
+.form-perfil .fila{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:14px;
+}
+
+.form-perfil .campo{
+    flex:1;
+    min-width:200px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.form-perfil label{
+    font-size:.78rem;
+    font-weight:600;
+    color:var(--muted);
+}
+
+.form-perfil input{
+    padding:10px 12px;
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    font-size:.88rem;
+    color:var(--text);
+    background:var(--bg);
+    transition:.15s ease;
+}
+
+.form-perfil input:focus{
+    outline:none;
+    border-color:var(--accent);
+    background:#fff;
+    box-shadow:0 0 0 3px var(--accent-soft);
+}
+
+/* ===================== BOTONES ===================== */
+.btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 20px;
+    border-radius:var(--radius-md);
+    border:none;
+    cursor:pointer;
+    font-size:.86rem;
+    font-weight:700;
+    color:#fff;
+    transition:.18s ease;
+}
+
+.btn-primario{
+    background:linear-gradient(135deg,var(--accent),#6d5ff5);
+    box-shadow:0 4px 14px rgba(79,109,245,.3);
+}
+
+.btn-primario:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(79,109,245,.4); }
+
+.btn-secundario{
+    background:var(--orange);
+    box-shadow:0 4px 14px rgba(247,144,9,.3);
+}
+
+.btn-secundario:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(247,144,9,.4); }
